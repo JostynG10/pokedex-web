@@ -25,6 +25,10 @@ body {
   height: 100dvh;
   margin: 0;
   overflow: hidden;
+  background-color: var(--red-light);
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,

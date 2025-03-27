@@ -1,9 +1,15 @@
-import styles from "./page.module.css";
+import React from "react";
+import Header from "@/components/Header";
+import Main from "@/components/Main";
+// import styles from "@/styles/page.module.css";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <header className={styles.header}></header>
-    </div>
+    <>
+      <Header />
+      <Main />
+    </>
   );
-}
+};
+
+export default Home;
