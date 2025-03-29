@@ -28,7 +28,9 @@ const Main: React.FC = () => {
   return (
     <main className={styles.main}>
       <div className={styles.mainForm}>
-        <div className={styles.mainTopForm} />
+        <div className={styles.mainLeftForm} />
+        <div className={styles.mainMiddleForm} />
+        <div className={styles.mainRightForm} />
       </div>
 
       <section className={styles.resultSection}>
