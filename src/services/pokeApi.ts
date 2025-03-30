@@ -7,7 +7,8 @@ export async function getPokemonList(
   limit: number = 10
 ): Promise<PokemonListResponse> {
   const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
+    { cache: "force-cache" }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

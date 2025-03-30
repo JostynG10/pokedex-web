@@ -1,0 +1,131 @@
+.resultSection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.listTop {
+  width: 100%;
+  min-height: 1.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border: 0.125rem solid var(--black-dark);
+  background-color: var(--grey-dark);
+  box-sizing: border-box;
+  box-shadow: 0 0.625rem 0.9375rem 0 rgba(0, 0, 0, 0.5);
+}
+
+.pokemonList {
+  padding: 0 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  overflow: scroll;
+}
+
+.pokemonList > :first-child {
+  margin-top: 1rem;
+}
+
+.pokemonList > :last-child {
+  margin-bottom: 1rem;
+}
+
+.listBottom {
+  width: 100%;
+  min-height: 1.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  border: 0.125rem solid var(--black-dark);
+  background-color: var(--grey-dark);
+  box-sizing: border-box;
+  box-shadow: 0 -0.625rem 0.9375rem 0 rgba(0, 0, 0, 0.5);
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.paginationButton {
+  width: min-content;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  border: 0.125rem solid #000000;
+  background-color: var(--black-dark);
+  color: var(--white);
+  font-size: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  text-wrap: nowrap;
+  cursor: pointer;
+}
+
+.paginationButton:disabled {
+  background-color: var(--grey-light);
+  color: var(--grey-dark);
+  cursor: not-allowed;
+}
+
+.error {
+  flex-grow: 1;
+  display: grid;
+  place-items: center;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.errorScreen {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 0.125rem solid var(--green-dark);
+  background-color: var(--green-light);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.errorIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--green-dark);
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-align: center;
+}
+
+.errorButton {
+  width: calc(100% - 2rem);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  border: 0.125rem solid #000000;
+  background-color: var(--black-dark);
+  color: var(--white);
+  font-size: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
