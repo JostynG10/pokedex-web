@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ResultsList from "./ResultsList";
 import styles from "@/styles/Main.module.css";
 import SearchBar from "./SearchBar";
@@ -12,7 +12,11 @@ const Main: React.FC = () => {
         <span className={styles.mainRightForm} />
       </section>
 
-      <SearchBar />
+      <Suspense
+        fallback={<div className={styles.loadingSearchBar}>Loading...</div>}
+      >
+        <SearchBar />
+      </Suspense>
       <ResultsList />
     </main>
   );
