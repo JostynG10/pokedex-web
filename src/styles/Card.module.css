@@ -1,5 +1,6 @@
 .card {
   width: 100%;
+  max-width: 17.625rem;
   padding: 2rem 2rem 1rem 2rem;
   border-radius: 0.5rem 0.5rem 0.5rem 3rem;
   border: 0.125rem solid var(--grey-dark);
