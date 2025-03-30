@@ -2,7 +2,8 @@
 
 import React, { useEffect } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { getPokemonList } from "@/services/pokeApi";
+import { getPokemonByName, getPokemonList } from "@/services/pokeApi";
+import { useSearchParams } from "next/navigation";
 import PokemonListResponse from "@/types/PokemonListResponse";
 import PokemonListItem from "@/types/PokemonListItem";
 import Card from "./Card";
@@ -18,8 +19,9 @@ const ResultsList: React.FC = () => {
   const [offset, setOffset] = React.useState<number>(0);
   const [prevOffset, setPrevOffset] = React.useState<number | null>(null);
   const [nextOffset, setNextOffset] = React.useState<number | null>(null);
+  const searchParams = useSearchParams();
 
-  const fetchData = React.useCallback(async () => {
+  const fetchDataList = React.useCallback(async () => {
     try {
       setLoading(true);
       setHasError(false);
@@ -52,9 +54,36 @@ const ResultsList: React.FC = () => {
     }
   }, [offset]);
 
+  const fetchDataByName = React.useCallback(async (searchValue: string) => {
+    try {
+      setLoading(true);
+      setHasError(false);
+
+      if (listRef.current) {
+        listRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      const data: PokemonListItem = await getPokemonByName(searchValue);
+      setPokemonList([data]);
+      setPrevOffset(null);
+      setNextOffset(null);
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setHasError(true);
+      console.error("Error fetching Pokemon by name:", error);
+    }
+  }, []);
+
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    const searchQuery = searchParams.get("search");
+    if (searchQuery) {
+      fetchDataByName(searchQuery);
+    } else {
+      fetchDataList();
+    }
+  }, [searchParams, fetchDataByName, fetchDataList]);
 
   const clickPrevButton = () => {
     if (prevOffset !== null) {
@@ -74,29 +103,29 @@ const ResultsList: React.FC = () => {
         <section className={styles.resultSection}>
           <div className={styles.listContainer}>
             <div className={styles.list}>
-            <span className={styles.listTop}></span>
-            <div ref={listRef} className={styles.pokemonList}>
-              {loading
-                ? [...Array(10)].map((_, index) => (
-                    <Card key={index} name="Cargando..." url="" />
-                  ))
-                : pokemonList?.map((pokemon) => {
-                    const pokemonNumber = parseInt(
-                      pokemon.url.split("/").filter(Boolean).pop() || "0",
-                      10
-                    );
-                    return (
-                      <Card
-                        key={pokemon.name}
-                        number={pokemonNumber}
-                        name={pokemon.name}
-                        url={pokemon.url}
-                      />
-                    );
-                  })}
+              <span className={styles.listTop}></span>
+              <div ref={listRef} className={styles.pokemonList}>
+                {loading
+                  ? [...Array(10)].map((_, index) => (
+                      <Card key={index} name="Cargando..." url="" />
+                    ))
+                  : pokemonList?.map((pokemon) => {
+                      const pokemonNumber = parseInt(
+                        pokemon.url.split("/").filter(Boolean).pop() || "0",
+                        10
+                      );
+                      return (
+                        <Card
+                          key={pokemon.name}
+                          number={pokemonNumber}
+                          name={pokemon.name}
+                          url={pokemon.url}
+                        />
+                      );
+                    })}
+              </div>
+              <span className={styles.listBottom}></span>
             </div>
-            <span className={styles.listBottom}></span>
-          </div>
           </div>
 
           <div className={styles.pagination}>
@@ -127,7 +156,7 @@ const ResultsList: React.FC = () => {
               </h2>
             </div>
 
-            <button className={styles.errorButton} onClick={fetchData}>
+            <button className={styles.errorButton} onClick={fetchDataList}>
               Intentar de nuevo
             </button>
           </div>

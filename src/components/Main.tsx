@@ -1,16 +1,18 @@
 import React from "react";
 import ResultsList from "./ResultsList";
 import styles from "@/styles/Main.module.css";
+import SearchBar from "./SearchBar";
 
 const Main: React.FC = () => {
   return (
     <main className={styles.main}>
-      <div className={styles.mainForm}>
-        <div className={styles.mainLeftForm} />
-        <div className={styles.mainMiddleForm} />
-        <div className={styles.mainRightForm} />
-      </div>
+      <section className={styles.mainForm}>
+        <span className={styles.mainLeftForm} />
+        <span className={styles.mainMiddleForm} />
+        <span className={styles.mainRightForm} />
+      </section>
 
+      <SearchBar />
       <ResultsList />
     </main>
   );
