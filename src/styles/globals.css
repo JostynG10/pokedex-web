@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 :root {
   --black-dark: #444444;
   --grey-dark: #7c8282;
@@ -19,15 +21,12 @@
   --font-color-light: #aaaaaa;
 }
 
-body {
-  width: 100dvw;
-  height: 100dvh;
-  margin: 0;
-  overflow: hidden;
-  background-color: var(--red-light);
-  position: relative;
-  display: flex;
-  flex-direction: column;
+html,
+input,
+button {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
 h1,
@@ -38,4 +37,15 @@ h5,
 h6,
 p {
   margin: 0;
+}
+
+body {
+  width: 100dvw;
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--red-light);
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }

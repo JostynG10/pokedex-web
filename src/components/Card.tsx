@@ -25,16 +25,35 @@ const Card: React.FC<CardProps> = ({ name, url }) => {
 
   return (
     <div className={styles.card}>
+      <div className={styles.pointsBox}>
+        <div className={styles.point} />
+        <div className={styles.point} />
+      </div>
+
       <div className={styles.imageContainer}>
         <Image
-          src={imageUrl || ""}
-          alt={name}
+          src="/images/card-background.jpg"
+          alt="Fondo"
           width={150}
           height={150}
-          className={styles.image}
+          className={styles.imageBackground}
         />
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            alt={name}
+            width={150}
+            height={150}
+            className={styles.pokemonImage}
+          />
+        )}
       </div>
-      <h2 className={styles.name}>{name}</h2>
+
+      <h2 className={styles.name}>
+        {!imageUrl
+          ? "Cargando..."
+          : name.charAt(0).toUpperCase() + name.slice(1)}
+      </h2>
     </div>
   );
 };
