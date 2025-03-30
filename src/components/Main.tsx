@@ -78,25 +78,29 @@ const Main: React.FC = () => {
 
       {!hasError ? (
         <section className={styles.resultSection}>
-          <div ref={listRef} className={styles.list}>
-            {loading
-              ? [...Array(10)].map((_, index) => (
-                  <Card key={index} name="Cargando..." url="" />
-                ))
-              : pokemonList?.map((pokemon) => {
-                  const pokemonNumber = parseInt(
-                    pokemon.url.split("/").filter(Boolean).pop() || "0",
-                    10
-                  );
-                  return (
-                    <Card
-                      key={pokemon.name}
-                      number={pokemonNumber}
-                      name={pokemon.name}
-                      url={pokemon.url}
-                    />
-                  );
-                })}
+          <div className={styles.list}>
+            <span className={styles.listTop}></span>
+            <div ref={listRef} className={styles.pokemonList}>
+              {loading
+                ? [...Array(10)].map((_, index) => (
+                    <Card key={index} name="Cargando..." url="" />
+                  ))
+                : pokemonList?.map((pokemon) => {
+                    const pokemonNumber = parseInt(
+                      pokemon.url.split("/").filter(Boolean).pop() || "0",
+                      10
+                    );
+                    return (
+                      <Card
+                        key={pokemon.name}
+                        number={pokemonNumber}
+                        name={pokemon.name}
+                        url={pokemon.url}
+                      />
+                    );
+                  })}
+            </div>
+            <span className={styles.listBottom}></span>
           </div>
 
           <div className={styles.pagination}>
