@@ -16,8 +16,8 @@ const Main: React.FC = () => {
         fallback={<div className={styles.loadingSearchBar}>Loading...</div>}
       >
         <SearchBar />
+        <ResultsList />
       </Suspense>
-      <ResultsList />
     </main>
   );
 };
