@@ -1,7 +1,10 @@
 import React, { Suspense } from "react";
-import ResultsList from "./ResultsList";
+import Result from "./Result";
 import styles from "@/styles/Main.module.css";
 import SearchBar from "./SearchBar";
+import SearchBarLoading from "./SearchBarLoading";
+import Content from "./Content";
+import ResultLoading from "./ResultLoading";
 
 const Main: React.FC = () => {
   return (
@@ -12,12 +15,15 @@ const Main: React.FC = () => {
         <span className={styles.mainRightForm} />
       </section>
 
-      <Suspense
-        fallback={<div className={styles.loadingSearchBar}>Loading...</div>}
-      >
+      <Suspense fallback={<SearchBarLoading />}>
         <SearchBar />
-        <ResultsList />
       </Suspense>
+
+      <Content>
+        <Suspense fallback={<ResultLoading />}>
+          <Result />
+        </Suspense>
+      </Content>
     </main>
   );
 };

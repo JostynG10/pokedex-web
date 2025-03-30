@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import ReduxProvider from "@/components/ReduxProvider";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }
