@@ -72,7 +72,8 @@ const ResultsList: React.FC = () => {
     <>
       {!hasError ? (
         <section className={styles.resultSection}>
-          <div className={styles.list}>
+          <div className={styles.listContainer}>
+            <div className={styles.list}>
             <span className={styles.listTop}></span>
             <div ref={listRef} className={styles.pokemonList}>
               {loading
@@ -95,6 +96,7 @@ const ResultsList: React.FC = () => {
                   })}
             </div>
             <span className={styles.listBottom}></span>
+          </div>
           </div>
 
           <div className={styles.pagination}>
