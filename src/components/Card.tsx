@@ -3,11 +3,12 @@ import Image from "next/image";
 import CardProps from "@/types/CardProps";
 import styles from "@/styles/Card.module.css";
 
-const Card: React.FC<CardProps> = ({ name, url }) => {
+const Card: React.FC<CardProps> = ({ number, name, url }) => {
   const [imageUrl, setImageUrl] = React.useState<string | null>(null);
 
   useEffect(() => {
     const fetchImage = async () => {
+      if (!url) return;
       try {
         const res = await fetch(url);
         if (!res.ok) {
@@ -25,19 +26,20 @@ const Card: React.FC<CardProps> = ({ name, url }) => {
 
   return (
     <div className={styles.card}>
-      <div className={styles.pointsBox}>
-        <div className={styles.point} />
-        <div className={styles.point} />
-      </div>
+      <ul className={styles.pointsBox}>
+        <li className={styles.point} />
+        <li className={styles.point} />
+      </ul>
 
       <div className={styles.imageContainer}>
         <Image
           src="/images/card-background.jpg"
           alt="Fondo"
-          width={150}
+          width={220}
           height={150}
-          className={styles.imageBackground}
+          priority
         />
+
         {imageUrl && (
           <Image
             src={imageUrl}
@@ -50,6 +52,7 @@ const Card: React.FC<CardProps> = ({ name, url }) => {
       </div>
 
       <h2 className={styles.name}>
+        {number && <span className={styles.number}>{number} - </span>}
         {!imageUrl
           ? "Cargando..."
           : name.charAt(0).toUpperCase() + name.slice(1)}

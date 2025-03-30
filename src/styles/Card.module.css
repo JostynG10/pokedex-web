@@ -42,11 +42,6 @@
   overflow: hidden;
 }
 
-.imageBackground {
-  width: auto;
-  height: 100%;
-}
-
 .pokemonImage {
   position: absolute;
   top: 50%;
@@ -54,9 +49,14 @@
   transform: translate(-50%, -50%);
 }
 
+.number {
+  color: var(--font-color-light);
+}
+
 .name {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--font-color-medium);
   text-align: right;
+  text-wrap: nowrap;
 }
