@@ -9,7 +9,7 @@
   --red-light: #d30a40;
   --red-bright: #e9011a;
   --blue-dark: #0ebdd2;
-  --blue-medium: #09eff4;
+  --blue-medium: #0febf7;
   --blue-light: #a4f4f9;
   --yellow-dark: #8f963d;
   --yellow-light: #e8f25e;
@@ -37,6 +37,23 @@ h5,
 h6,
 p {
   margin: 0;
+}
+
+button,
+input,
+ul,
+li,
+table,
+tr,
+th,
+td {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  list-style-type: none;
+  text-decoration: none;
 }
 
 body {

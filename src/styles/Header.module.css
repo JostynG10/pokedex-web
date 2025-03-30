@@ -1,9 +1,9 @@
 .header {
+  width: 100%;
+  height: 4rem;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 4rem;
 }
 
 .headerForm {
@@ -70,4 +70,75 @@
   right: 0;
   z-index: 6;
   background-color: var(--red-light);
+}
+
+.content {
+  position: relative;
+  padding: 0.5rem 1rem;
+  z-index: 7;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.borderSphere {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0.125rem solid var(--grey-dark);
+  background-color: #ffffff;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+}
+
+.sphere {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  border: 0.0625rem solid var(--grey-dark);
+  background-color: var(--blue-medium);
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+}
+
+.textAndPoints {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pointsBox {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.point {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 0.125rem solid var(--grey-dark);
+}
+
+.pointRed {
+  background-color: var(--red-bright);
+}
+
+.pointYellow {
+  background-color: var(--yellow-light);
+}
+
+.pointGreen {
+  background-color: var(--green-light);
+}
+
+.title {
+  padding-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
 }
