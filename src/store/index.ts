@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import offsetsReducer from "@/store/slices/offsetsSlice";
+import paginationReducer from "@/store/slices/paginationSlice";
 
 export const store = configureStore({
   reducer: {
-    offset: offsetsReducer,
+    pagination: paginationReducer,
   },
 });
 

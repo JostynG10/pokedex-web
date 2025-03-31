@@ -5,7 +5,7 @@ import { getPokemonByName, getPokemonList } from "@/services/pokeApi";
 import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
-import { setPrevOffset, setNextOffset } from "@/store/slices/offsetsSlice";
+import { setPrevOffset, setNextOffset } from "@/store/slices/paginationSlice";
 import { FaExclamationTriangle } from "react-icons/fa";
 import PokemonListResponse from "@/types/PokemonListResponse";
 import PokemonListItem from "@/types/PokemonListItem";
@@ -24,7 +24,10 @@ const Result: React.FC = () => {
 
   const dispatch = useDispatch();
   const currentOffset = useSelector(
-    (state: RootState) => state.offset.currentOffset
+    (state: RootState) => state.pagination.currentOffset
+  );
+  const currentLimit = useSelector(
+    (state: RootState) => state.pagination.currentLimit
   );
 
   const fetchDataList = React.useCallback(async () => {
@@ -36,7 +39,10 @@ const Result: React.FC = () => {
         listRef.current.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      const data: PokemonListResponse = await getPokemonList(currentOffset, 10);
+      const data: PokemonListResponse = await getPokemonList(
+        currentOffset,
+        currentLimit
+      );
       setPokemonList(data.results);
       dispatch(
         setPrevOffset(
@@ -62,7 +68,7 @@ const Result: React.FC = () => {
       setHasError(true);
       console.error("Error fetching Pokemon list:", error);
     }
-  }, [currentOffset, dispatch]);
+  }, [currentOffset, currentLimit, dispatch]);
 
   const fetchDataByName = React.useCallback(
     async (searchValue: string) => {

@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import OffsetsState from "@/types/OffsetsState";
+import PaginationState from "@/types/PaginationState";
 
-const initialState: OffsetsState = {
+const initialState: PaginationState = {
   currentOffset: 0,
   prevOffset: null,
   nextOffset: null,
+  currentLimit: 10,
 };
 
-const pokemonSlice = createSlice({
+const paginationSlice = createSlice({
   name: "pokemon",
   initialState,
   reducers: {
@@ -20,9 +21,16 @@ const pokemonSlice = createSlice({
     setNextOffset: (state, action: PayloadAction<number | null>) => {
       state.nextOffset = action.payload;
     },
+    setCurrentLimit: (state, action: PayloadAction<number>) => {
+      state.currentLimit = action.payload;
+    },
   },
 });
 
-export const { setCurrentOffset, setPrevOffset, setNextOffset } =
-  pokemonSlice.actions;
-export default pokemonSlice.reducer;
+export const {
+  setCurrentOffset,
+  setPrevOffset,
+  setNextOffset,
+  setCurrentLimit,
+} = paginationSlice.actions;
+export default paginationSlice.reducer;

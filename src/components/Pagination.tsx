@@ -3,13 +3,25 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
-import { setCurrentOffset } from "@/store/slices/offsetsSlice";
+import {
+  setCurrentOffset,
+  setCurrentLimit,
+} from "@/store/slices/paginationSlice";
 import styles from "@/styles/Pagination.module.css";
+
+const limits = [10, 20, 30];
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
-  const prevOffset = useSelector((state: RootState) => state.offset.prevOffset);
-  const nextOffset = useSelector((state: RootState) => state.offset.nextOffset);
+  const prevOffset = useSelector(
+    (state: RootState) => state.pagination.prevOffset
+  );
+  const nextOffset = useSelector(
+    (state: RootState) => state.pagination.nextOffset
+  );
+  const currentLimit = useSelector(
+    (state: RootState) => state.pagination.currentLimit
+  );
 
   const clickPrevButton = () => {
     if (prevOffset !== null) {
@@ -23,6 +35,13 @@ const Pagination: React.FC = () => {
     }
   };
 
+  const clickLimitButton = () => {
+    const limitPosition = limits.indexOf(currentLimit);
+    const nextLimit = limits[(limitPosition + 1) % limits.length];
+    console.log(`nextLimit: ${nextLimit}`);
+    dispatch(setCurrentLimit(nextLimit));
+  };
+
   return (
     <div className={styles.pagination}>
       <button
@@ -32,6 +51,15 @@ const Pagination: React.FC = () => {
       >
         Anterior
       </button>
+
+      <button
+        onClick={clickLimitButton}
+        type="button"
+        className={`${styles.paginationButton} ${styles.paginationToggle}`}
+      >
+        {currentLimit}
+      </button>
+
       <button
         onClick={clickNextButton}
         className={styles.paginationButton}
