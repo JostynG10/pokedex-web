@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import AbilityEffect from "@/types/AbilityEffect";
 import PokemonInfo from "@/types/PokemonInfo";
