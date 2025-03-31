@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
+import { FaExclamationTriangle } from "react-icons/fa";
 import InfoModal from "@/components/InfoModal";
 import InfoModalProps from "@/types/InfoModalProps";
 import ModalContextProps from "@/types/ModalContextProps";
@@ -11,39 +12,77 @@ const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [modalProps, setModalProps] = useState<InfoModalProps | null>(null);
-  const [isHidden, setIsHidden] = useState<boolean>(false);
+  const [isHidden, setIsHidden] = useState<boolean>(true);
+
+  const showLoading = () => {
+    console.log("showLoading called");
+    setLoading(true);
+    setHasError(false);
+    setIsHidden(false);
+  };
 
   const showModal = (props: InfoModalProps) => {
+    setLoading(false);
     setModalProps(props);
     setIsHidden(false);
   };
 
   const hideModal = () => {
-    setModalProps(null);
     setIsHidden(true);
+    setTimeout(() => {
+      setModalProps(null);
+    }, 300);
+  };
+
+  const showError = () => {
+    setHasError(true);
+    setLoading(false);
   };
 
   return (
-    <ModalContext.Provider value={{ showModal, hideModal }}>
+    <ModalContext.Provider
+      value={{ showLoading, showModal, hideModal, showError }}
+    >
       {children}
-      {modalProps && (
+      <div
+        className={`${styles.modalOverlay} ${
+          !isHidden ? styles.modalOverlayVisible : ""
+        }`}
+        onClick={hideModal}
+      >
         <div
-          className={`${styles.modalOverlay} ${
-            !isHidden ? styles.modalOverlayVisible : ""
+          className={`${styles.modalContent} ${
+            !isHidden ? styles.modalContentVisible : ""
           }`}
-          onClick={hideModal}
+          onClick={(e) => e.stopPropagation()}
         >
-          <div
-            className={`${styles.modalContent} ${
-              !isHidden ? styles.modalContentVisible : ""
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <InfoModal {...modalProps} closeModal={hideModal} />
-          </div>
+          {modalProps && <InfoModal {...modalProps} closeModal={hideModal} />}
+          {(loading || hasError) && (
+            <div className={styles.loadingContainer}>
+              <div className={styles.screen}>
+                <FaExclamationTriangle className={styles.screenIcon} />
+
+                <h2 className={styles.screenMessage}>
+                  {loading ? "Loading data..." : "Failed to load data."}
+                </h2>
+              </div>
+
+              {hasError && (
+                <button
+                  onClick={hideModal}
+                  type="button"
+                  className={styles.closeButton}
+                >
+                  close
+                </button>
+              )}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </ModalContext.Provider>
   );
 };

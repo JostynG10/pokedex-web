@@ -12,7 +12,7 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
 
-  const { showModal } = useModal();
+  const { showModal, showLoading, showError } = useModal();
 
   const fetchImage = useCallback(async (url: string) => {
     try {
@@ -33,6 +33,8 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
   const fetchPokemonInfo = useCallback(
     async (name: string) => {
       try {
+        showLoading();
+
         const data: PokemonInfo = await getPokemonInfo(name);
         showModal({
           url,
@@ -43,10 +45,11 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
           weight: data.weight,
         });
       } catch (error) {
+        showError();
         console.error("Error fetching Pokemon info:", error);
       }
     },
-    [number, url, showModal]
+    [number, url, showModal, showLoading, showError]
   );
 
   useEffect(() => {
