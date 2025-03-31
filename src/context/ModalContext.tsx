@@ -12,25 +12,28 @@ const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [canHide, setCanHide] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [modalProps, setModalProps] = useState<InfoModalProps | null>(null);
   const [isHidden, setIsHidden] = useState<boolean>(true);
 
   const showLoading = () => {
-    console.log("showLoading called");
     setLoading(true);
     setHasError(false);
     setIsHidden(false);
+    setTimeout(() => setCanHide(true), 300);
   };
 
   const showModal = (props: InfoModalProps) => {
     setLoading(false);
     setModalProps(props);
     setIsHidden(false);
+    setTimeout(() => setCanHide(true), 300);
   };
 
   const hideModal = () => {
+    if (!canHide) return;
     setIsHidden(true);
     setTimeout(() => {
       setModalProps(null);
