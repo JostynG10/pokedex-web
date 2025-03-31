@@ -35,6 +35,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   const hideModal = () => {
     if (!canHide) return;
     setIsHidden(true);
+    setCanHide(false);
     setTimeout(() => {
       setModalProps(null);
     }, 300);
