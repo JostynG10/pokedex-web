@@ -148,7 +148,7 @@ const Result: React.FC = () => {
           )}
         </div>
       ) : (
-        <LoadingError reload={reload} />
+        <LoadingError isSearch={!!searchParams.get("search")} reload={reload} />
       )}
     </>
   );
