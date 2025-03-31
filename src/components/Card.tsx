@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { getPokemonInfo } from "@/services/pokeApi";
+import { getPokemonImage, getPokemonInfo } from "@/services/pokeApi";
 import { useModal } from "@/context/ModalContext";
 import Image from "next/image";
 import CardProps from "@/types/CardProps";
@@ -19,13 +19,9 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
       setLoading(true);
       setHasError(false);
 
-      const res = await fetch(url, { cache: "force-cache" });
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const data = await res.json();
+      const data = await getPokemonImage(url);
+      setImageUrl(data);
 
-      setImageUrl(data.sprites.front_default);
       setLoading(false);
     } catch (error) {
       setLoading(false);

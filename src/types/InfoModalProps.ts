@@ -8,5 +8,5 @@ export default interface InfoModalProps {
   abilities: PokemonAbility[];
   types: PokemonType[];
   weight: number;
-  closeModal: () => void;
+  closeModal?: () => void;
 }

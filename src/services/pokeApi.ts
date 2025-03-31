@@ -19,6 +19,15 @@ export async function getPokemonList(
   return res.json();
 }
 
+export async function getPokemonImage(url: string): Promise<string> {
+  const res = await fetch(url, { cache: "force-cache" });
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await res.json();
+  return data.sprites.front_default;
+}
+
 export async function getPokemonByName(name: string): Promise<PokemonListItem> {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
     cache: "force-cache",
