@@ -63,27 +63,30 @@ const Result: React.FC = () => {
     }
   }, [currentOffset, dispatch]);
 
-  const fetchDataByName = React.useCallback(async (searchValue: string) => {
-    try {
-      setLoading(true);
-      setHasError(false);
+  const fetchDataByName = React.useCallback(
+    async (searchValue: string) => {
+      try {
+        setLoading(true);
+        setHasError(false);
 
-      if (listRef.current) {
-        listRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        if (listRef.current) {
+          listRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        const data: PokemonListItem = await getPokemonByName(searchValue);
+        setPokemonList([data]);
+        dispatch(setPrevOffset(null));
+        dispatch(setNextOffset(null));
+
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setHasError(true);
+        console.error("Error fetching Pokemon by name:", error);
       }
-
-      const data: PokemonListItem = await getPokemonByName(searchValue);
-      setPokemonList([data]);
-      setPrevOffset(null);
-      setNextOffset(null);
-
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      setHasError(true);
-      console.error("Error fetching Pokemon by name:", error);
-    }
-  }, []);
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const searchQuery = searchParams.get("search");
