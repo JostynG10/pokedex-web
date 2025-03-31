@@ -50,17 +50,21 @@
   border-color: var(--red-dark);
 }
 
-.loadingSearchBar {
+.searchContainer {
   width: 100%;
-  height: 2.25rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border-width: 0.125rem;
-  border-style: solid;
-  border-color: #000000;
-  background-color: var(--white);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-sizing: border-box;
+}
+
+@media (min-width: 50rem) {
+  .searchContainer {
+    width: calc(50% - 2rem);
+    align-self: flex-end;
+    margin-top: -1.4rem;
+  }
+}
+
+@media (min-width: 70.75rem) {
+  .main {
+    margin-left: calc((100% - 68.75rem) / 2);
+    margin-right: calc((100% - 68.75rem) / 2);
+  }
 }

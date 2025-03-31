@@ -15,9 +15,11 @@ const Main: React.FC = () => {
         <span className={styles.mainRightForm} />
       </section>
 
-      <Suspense fallback={<SearchBarLoading />}>
-        <SearchBar />
-      </Suspense>
+      <div className={styles.searchContainer}>
+        <Suspense fallback={<SearchBarLoading />}>
+          <SearchBar />
+        </Suspense>
+      </div>
 
       <Content>
         <Suspense fallback={<ResultLoading />}>

@@ -6,6 +6,8 @@
 }
 
 .errorContent {
+  width: 100%;
+  max-width: 27rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

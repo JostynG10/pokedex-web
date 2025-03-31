@@ -142,3 +142,10 @@
   color: #ffffff;
   text-align: center;
 }
+
+@media (min-width: 70.75rem) {
+  .content {
+    padding-left: calc((100% - 68.75rem) / 2);
+    padding-right: calc((100% - 68.75rem) / 2);
+  }
+}
