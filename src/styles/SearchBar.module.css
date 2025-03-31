@@ -21,6 +21,7 @@
 }
 
 .input {
+  width: 100%;
   flex-grow: 1;
   font-size: 0.75rem;
   color: var(--font-color-medium);
