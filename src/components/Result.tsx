@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getPokemonByName, getPokemonList } from "@/services/pokeApi";
 import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,11 +15,11 @@ import LoadingError from "./LoadingError";
 
 const Result: React.FC = () => {
   const listRef = React.useRef<HTMLDivElement>(null);
-  const [pokemonList, setPokemonList] = React.useState<
-    PokemonListItem[] | null
-  >(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [hasError, setHasError] = React.useState<boolean>(false);
+  const [pokemonList, setPokemonList] = useState<PokemonListItem[] | null>(
+    null
+  );
+  const [loading, setLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
   const searchParams = useSearchParams();
 
   const dispatch = useDispatch();

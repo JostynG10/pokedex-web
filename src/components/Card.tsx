@@ -1,13 +1,18 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
+import { getPokemonInfo } from "@/services/pokeApi";
+import { useModal } from "@/context/ModalContext";
 import Image from "next/image";
 import CardProps from "@/types/CardProps";
 import styles from "@/styles/Card.module.css";
+import PokemonInfo from "@/types/PokemonInfo";
 
 const Card: React.FC<CardProps> = ({ number, name, url }) => {
-  const [imageUrl, setImageUrl] = React.useState<string | null>(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [hasError, setHasError] = React.useState<boolean>(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
+
+  const { showModal } = useModal();
 
   const fetchImage = useCallback(async (url: string) => {
     try {
@@ -29,6 +34,25 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
     }
   }, []);
 
+  const fetchPokemonInfo = useCallback(
+    async (name: string) => {
+      try {
+        const data: PokemonInfo = await getPokemonInfo(name);
+        showModal({
+          url,
+          name,
+          number,
+          abilities: data.abilities,
+          types: data.types,
+          weight: data.weight,
+        });
+      } catch (error) {
+        console.error("Error fetching Pokemon info:", error);
+      }
+    },
+    [number, url, showModal]
+  );
+
   useEffect(() => {
     if (url) fetchImage(url);
   }, [url, fetchImage]);
@@ -37,8 +61,28 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
     fetchImage(url);
   };
 
+  const handleDoubleClick = () => {
+    fetchPokemonInfo(name);
+  };
+
+  const handleDoubleTouch = () => {
+    let lastTouch = 0;
+    return () => {
+      const now = Date.now();
+      const timeSinceLastTouch = now - lastTouch;
+      if (timeSinceLastTouch < 300 && timeSinceLastTouch > 0) {
+        fetchPokemonInfo(name);
+      }
+      lastTouch = now;
+    };
+  };
+
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onDoubleClick={handleDoubleClick}
+      onTouchStart={handleDoubleTouch()}
+    >
       <ul className={styles.pointsBox}>
         <li className={styles.point} />
         <li className={styles.point} />

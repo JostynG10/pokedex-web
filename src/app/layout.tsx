@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import { ModalProvider } from "@/context/ModalContext";
 import ReduxProvider from "@/components/ReduxProvider";
 import "@/styles/globals.css";
 
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

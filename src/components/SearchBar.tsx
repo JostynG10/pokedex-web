@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaTimes, FaSearch } from "react-icons/fa";
 import styles from "@/styles/SearchBar.module.css";
 
 const SearchBar: React.FC = () => {
-  const [searchValue, setSearchValue] = React.useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>("");
   const router = useRouter();
   const searchParams = useSearchParams();
 
