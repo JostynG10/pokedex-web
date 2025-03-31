@@ -14,6 +14,8 @@ const SearchBar: React.FC = () => {
     const searchQuery = searchParams.get("search");
     if (searchQuery) {
       setSearchValue(decodeURIComponent(searchQuery));
+    }else{
+      setSearchValue("");
     }
   }, [searchParams]);
 
