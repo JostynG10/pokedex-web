@@ -1,18 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { getPokemonImage, getPokemonInfo } from "@/services/pokeApi";
+import { getPokemonImage } from "@/services/pokeApi";
 import { useModal } from "@/context/ModalContext";
 import Image from "next/image";
 import CardProps from "@/types/CardProps";
 import styles from "@/styles/Card.module.css";
-import PokemonInfo from "@/types/PokemonInfo";
 
 const Card: React.FC<CardProps> = ({ number, name, url }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
 
-  const { showModal, showLoading, showError } = useModal();
+  const { showModal } = useModal();
 
   const fetchImage = useCallback(async (url: string) => {
     try {
@@ -30,28 +29,6 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
     }
   }, []);
 
-  const fetchPokemonInfo = useCallback(
-    async (name: string) => {
-      try {
-        showLoading();
-
-        const data: PokemonInfo = await getPokemonInfo(name);
-        showModal({
-          url,
-          name,
-          number,
-          abilities: data.abilities,
-          types: data.types,
-          weight: data.weight,
-        });
-      } catch (error) {
-        showError();
-        console.error("Error fetching Pokemon info:", error);
-      }
-    },
-    [number, url, showModal, showLoading, showError]
-  );
-
   useEffect(() => {
     if (url) fetchImage(url);
   }, [url, fetchImage]);
@@ -61,7 +38,7 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
   };
 
   const handleDoubleClick = () => {
-    fetchPokemonInfo(name);
+    showModal({ url, name, number });
   };
 
   const handleDoubleTouch = () => {
@@ -70,7 +47,7 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
       const now = Date.now();
       const timeSinceLastTouch = now - lastTouch;
       if (timeSinceLastTouch < 300 && timeSinceLastTouch > 0) {
-        fetchPokemonInfo(name);
+        showModal({ url, name, number });
       }
       lastTouch = now;
     };
