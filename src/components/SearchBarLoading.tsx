@@ -6,7 +6,7 @@ const SearchBarLoading: React.FC = () => {
   return (
     <section className={styles.container}>
       <div className={styles.inputBox}>
-        <p className={styles.inputText}>Cargando...</p>
+        <p className={styles.inputText}>Loading...</p>
       </div>
       <div className={styles.searchIconBox}>
         <FaSearch className={styles.searchIcon} />

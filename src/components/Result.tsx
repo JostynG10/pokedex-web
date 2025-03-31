@@ -140,7 +140,7 @@ const Result: React.FC = () => {
             <div className={styles.loadingResult}>
               <FaExclamationTriangle className={styles.loadingIcon} />
               <h2 className={styles.loadingMessage}>
-                Cargando datos de Pokémon, por favor espera un momento...
+                Loading Pokémon data, please wait a moment...
               </h2>
             </div>
           ) : (

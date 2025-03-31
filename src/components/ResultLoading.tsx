@@ -8,7 +8,7 @@ const ResultLoading: React.FC = () => {
       <div className={styles.content}>
         <FaExclamationTriangle className={styles.errorIcon} />
         <h2 className={styles.errorMessage}>
-          Cargando datos de Pokémon, por favor espera un momento...
+          Loading Pokémon data, please wait a moment...
         </h2>
       </div>
     </section>

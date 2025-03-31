@@ -13,14 +13,14 @@ const LoadingError: React.FC<LoadingErrorProps> = ({ isSearch, reload }) => {
           <FaExclamationTriangle className={styles.errorIcon} />
           <h2 className={styles.errorMessage}>
             {isSearch
-              ? "No se encontró ningún resultado."
-              : "Ocurrió un error al cargar los datos. Por favor, intenta de nuevo."}
+              ? "No results were found."
+              : "An error occurred while loading the data. Please try again."}
           </h2>
         </div>
 
         {!isSearch && (
           <button className={styles.errorButton} onClick={reload}>
-            Intentar de nuevo
+            Try again
           </button>
         )}
       </div>

@@ -48,7 +48,7 @@ const Pagination: React.FC = () => {
         className={styles.paginationButton}
         disabled={prevOffset === null}
       >
-        Anterior
+        Previous
       </button>
 
       <button
@@ -65,7 +65,7 @@ const Pagination: React.FC = () => {
         className={styles.paginationButton}
         disabled={nextOffset === null}
       >
-        Proximo
+        Next
       </button>
     </div>
   );

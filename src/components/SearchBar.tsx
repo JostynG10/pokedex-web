@@ -33,7 +33,7 @@ const SearchBar: React.FC = () => {
       <div className={styles.inputBox}>
         <input
           type="text"
-          placeholder="Nombre de Pokemon"
+          placeholder="Pokemon name"
           className={styles.input}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}

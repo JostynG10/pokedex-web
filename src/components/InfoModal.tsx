@@ -122,7 +122,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
       </section>
 
       <button onClick={closeModal} type="button" className={styles.closeModal}>
-        Cerrar
+        Close
       </button>
     </div>
   );

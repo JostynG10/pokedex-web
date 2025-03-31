@@ -87,18 +87,18 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
       <section className={styles.imageContainer}>
         {loading ? (
           <div className={styles.loadingScreen}>
-            <h3 className={styles.screenMessage}>Cargando imagen...</h3>
+            <h3 className={styles.screenMessage}>Loading image...</h3>
           </div>
         ) : hasError ? (
           <div className={styles.loadingScreen}>
             <FaExclamationTriangle className={styles.errorIcon} />
-            <h3 className={styles.screenMessage}>Error al cargar la imagen</h3>
+            <h3 className={styles.screenMessage}>Error loading the image</h3>
             <button
               onClick={handleRetry}
               type="button"
               className={styles.screenButton}
             >
-              Reintentar
+              Retry
             </button>
           </div>
         ) : (
