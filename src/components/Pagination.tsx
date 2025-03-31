@@ -56,6 +56,7 @@ const Pagination: React.FC = () => {
         onClick={clickLimitButton}
         type="button"
         className={`${styles.paginationButton} ${styles.paginationToggle}`}
+        disabled={nextOffset === null && prevOffset === null}
       >
         {currentLimit}
       </button>
