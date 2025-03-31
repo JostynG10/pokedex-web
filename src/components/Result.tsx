@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { getPokemonByName, getPokemonList } from "@/services/pokeApi";
 import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
@@ -106,6 +106,23 @@ const Result: React.FC = () => {
     }
   };
 
+  const memorizeList = useMemo(() => {
+    return pokemonList?.map((pokemon) => {
+      const pokemonNumber = parseInt(
+        pokemon.url.split("/").filter(Boolean).pop() || "0",
+        10
+      );
+      return (
+        <Card
+          key={pokemon.name}
+          number={pokemonNumber}
+          name={pokemon.name}
+          url={pokemon.url}
+        />
+      );
+    });
+  }, [pokemonList]);
+
   return (
     <>
       {!hasError ? (
@@ -121,20 +138,7 @@ const Result: React.FC = () => {
               </h2>
             </div>
           ) : (
-            pokemonList?.map((pokemon) => {
-              const pokemonNumber = parseInt(
-                pokemon.url.split("/").filter(Boolean).pop() || "0",
-                10
-              );
-              return (
-                <Card
-                  key={pokemon.name}
-                  number={pokemonNumber}
-                  name={pokemon.name}
-                  url={pokemon.url}
-                />
-              );
-            })
+            memorizeList
           )}
         </div>
       ) : (
