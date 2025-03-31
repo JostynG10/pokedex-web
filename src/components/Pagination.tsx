@@ -38,7 +38,6 @@ const Pagination: React.FC = () => {
   const clickLimitButton = () => {
     const limitPosition = limits.indexOf(currentLimit);
     const nextLimit = limits[(limitPosition + 1) % limits.length];
-    console.log(`nextLimit: ${nextLimit}`);
     dispatch(setCurrentLimit(nextLimit));
   };
 
