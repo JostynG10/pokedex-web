@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/styles/Header.module.css";
+import HomeButton from "./HomeButton";
 
 const Header: React.FC = () => {
   return (
@@ -11,9 +12,7 @@ const Header: React.FC = () => {
       </nav>
 
       <section className={styles.content}>
-        <div className={styles.borderSphere}>
-          <span className={styles.sphere} />
-        </div>
+        <HomeButton />
 
         <div className={styles.textAndPoints}>
           <ul className={styles.pointsBox}>

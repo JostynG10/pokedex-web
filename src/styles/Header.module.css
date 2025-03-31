@@ -80,28 +80,6 @@
   gap: 0.5rem;
 }
 
-.borderSphere {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 0.125rem solid var(--grey-dark);
-  background-color: #ffffff;
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-}
-
-.sphere {
-  width: 2.3rem;
-  height: 2.3rem;
-  border-radius: 50%;
-  border: 0.0625rem solid var(--grey-dark);
-  background-color: var(--blue-medium);
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-}
-
 .textAndPoints {
   display: flex;
   flex-direction: column;
