@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { setPrevOffset, setNextOffset } from "@/store/slices/offsetsSlice";
+import { FaExclamationTriangle } from "react-icons/fa";
 import PokemonListResponse from "@/types/PokemonListResponse";
 import PokemonListItem from "@/types/PokemonListItem";
 import Card from "./Card";
@@ -108,25 +109,33 @@ const Result: React.FC = () => {
   return (
     <>
       {!hasError ? (
-        <div ref={listRef} className={styles.result}>
-          {loading
-            ? [...Array(10)].map((_, index) => (
-                <Card key={index} name="Cargando..." url="" />
-              ))
-            : pokemonList?.map((pokemon) => {
-                const pokemonNumber = parseInt(
-                  pokemon.url.split("/").filter(Boolean).pop() || "0",
-                  10
-                );
-                return (
-                  <Card
-                    key={pokemon.name}
-                    number={pokemonNumber}
-                    name={pokemon.name}
-                    url={pokemon.url}
-                  />
-                );
-              })}
+        <div
+          ref={listRef}
+          className={`${styles.result} ${loading ? styles.resultLoading : ""}`}
+        >
+          {loading ? (
+            <div className={styles.loadingResult}>
+              <FaExclamationTriangle className={styles.loadingIcon} />
+              <h2 className={styles.loadingMessage}>
+                Cargando datos de Pokémon, por favor espera un momento...
+              </h2>
+            </div>
+          ) : (
+            pokemonList?.map((pokemon) => {
+              const pokemonNumber = parseInt(
+                pokemon.url.split("/").filter(Boolean).pop() || "0",
+                10
+              );
+              return (
+                <Card
+                  key={pokemon.name}
+                  number={pokemonNumber}
+                  name={pokemon.name}
+                  url={pokemon.url}
+                />
+              );
+            })
+          )}
         </div>
       ) : (
         <LoadingError reload={reload} />

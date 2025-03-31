@@ -8,10 +8,40 @@
   overflow: scroll;
 }
 
+.resultLoading{
+  justify-content: center;
+}
+
 .result > :first-child {
   margin-top: 1rem;
 }
 
 .result > :last-child {
   margin-bottom: 1rem;
+}
+
+.loadingResult {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 0.125rem solid var(--green-dark);
+  background-color: var(--green-light);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loadingIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--green-dark);
+}
+
+.loadingMessage {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-align: center;
 }
