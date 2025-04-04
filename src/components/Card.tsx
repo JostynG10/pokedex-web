@@ -37,28 +37,12 @@ const Card: React.FC<CardProps> = ({ number, name, url }) => {
     fetchImage(url);
   };
 
-  const handleDoubleClick = () => {
+  const handleClick = () => {
     showModal({ url, name, number });
   };
 
-  const handleDoubleTouch = () => {
-    let lastTouch = 0;
-    return () => {
-      const now = Date.now();
-      const timeSinceLastTouch = now - lastTouch;
-      if (timeSinceLastTouch < 300 && timeSinceLastTouch > 0) {
-        showModal({ url, name, number });
-      }
-      lastTouch = now;
-    };
-  };
-
   return (
-    <article
-      className={styles.card}
-      onDoubleClick={handleDoubleClick}
-      onTouchStart={handleDoubleTouch()}
-    >
+    <article className={styles.card} onClick={handleClick}>
       <ul className={styles.pointsBox}>
         <li className={styles.point} />
         <li className={styles.point} />
